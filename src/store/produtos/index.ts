@@ -25,7 +25,12 @@ export const produtosSlice = createSlice({
             })
             .addCase(listProductThunk.fulfilled, (state, action) => {
                 state.loading = false
-                // state.list = action.payload
+                state.list = action.payload.map((p) => ({
+                    ...p,
+                    preco:
+                        typeof p.preco === 'string' ? Number(p.preco) : p.preco,
+                    clienteId: p.clienteId ?? 0,
+                }))
             })
             .addCase(createProductThunk.pending, (state) => {
                 state.loading = true

@@ -46,13 +46,20 @@ const ProductCard = ({ product, onRemove, onEdit }: Props) => {
             <Text style={{ color: theme.colors.gray[400] }}>
                 {product.descricao}
             </Text>
-            <Checkbox
-                disabled
-                label="Ativo"
-                value={!!product.ativo}
-                onChange={() => {}}
-                style={{ marginTop: 10 }}
-            />
+            <Box flexDirection="row" alignItems="center">
+                <Checkbox
+                    disabled
+                    label="Ativo"
+                    value={!!product.ativo}
+                    onChange={() => {}}
+                    style={{ flex: 1, marginTop: 10 }}
+                />
+                <Text style={{ fontWeight: 'bold' }}>
+                    {product.clienteId
+                        ? `Cliente ID: ${product.clienteId}`
+                        : 'Sem Cliente'}
+                </Text>
+            </Box>
         </Box>
     )
 }

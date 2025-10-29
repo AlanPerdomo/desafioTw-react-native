@@ -64,7 +64,7 @@ const Products = () => {
             <Box flex={1} padding={16}>
                 <Button
                     onPress={() => router.push('/produtos/form')}
-                    label="Novo produto"
+                    label="Novo Produto"
                 />
                 <Box>
                     {list.length === 0 ? (
