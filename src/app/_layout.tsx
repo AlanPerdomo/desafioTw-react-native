@@ -1,45 +1,54 @@
-import { SplashScreen, Stack } from "expo-router";
-import "react-native-reanimated";
+import { SplashScreen, Stack } from 'expo-router'
+import 'react-native-reanimated'
 
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar'
 
-import { Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
-import { useAppMigrations } from "../database";
-import store from "../store";
+import { Text, View } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Provider } from 'react-redux'
+import { useAppMigrations } from '../database'
+import store from '../store'
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 export const unstable_settings = {
-  anchor: "(tabs)",
-};
+    anchor: '(tabs)',
+}
 
 export default function RootLayout() {
-  const { success, error } = useAppMigrations();
+    const { success, error } = useAppMigrations()
 
-  if (!!success || !!error) {
-    SplashScreen.hideAsync();
-  } else {
-    return null;
-  }
+    if (!!success || !!error) {
+        SplashScreen.hideAsync()
+    } else {
+        return null
+    }
 
-  if (error) {
+    if (error) {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Text>{error.message}</Text>
+            </View>
+        )
+    }
+
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>{error.message}</Text>
-      </View>
-    );
-  }
-
-  return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <StatusBar style={"light"} />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-      </SafeAreaProvider>
-    </Provider>
-  );
+        <Provider store={store}>
+            <SafeAreaProvider>
+                <StatusBar style={'light'} />
+                <Stack>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                </Stack>
+            </SafeAreaProvider>
+        </Provider>
+    )
 }

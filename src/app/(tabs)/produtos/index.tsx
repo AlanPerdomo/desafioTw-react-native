@@ -3,9 +3,9 @@ import Button from "@/src/components/Button";
 import ClientCard from "@/src/components/ClientCard";
 import { useAppDispatch, useAppSelector } from "@/src/store";
 import {
-  deleteClientThunk,
-  listClientThunk,
-} from "@/src/store/clientes/thunks";
+  deleteProductThunk,
+  listProductThunk,
+} from "@/src/store/produtos/thunks";
 import { router, useFocusEffect } from "expo-router";
 import React, { useCallback } from "react";
 import {
@@ -23,18 +23,18 @@ const Products = () => {
 
   useFocusEffect(
     useCallback(() => {
-      dispatch(listClientThunk());
+      dispatch(listProductThunk());
     }, [])
   );
 
-  const handleRemove = (clientId: number) => {
+  const handleRemove = (productId: number) => {
     Alert.alert(
       "Excluir",
-      "Deseja realmente excluir esse cliente?",
+      "Deseja realmente excluir esse produto?",
       [
         {
           text: "Sim",
-          onPress: () => dispatch(deleteClientThunk(clientId)),
+          onPress: () => dispatch(deleteProductThunk(productId)),
         },
         {
           text: "Não",
@@ -45,8 +45,8 @@ const Products = () => {
     );
   };
 
-  const handleEdit = (clientId: number) => {
-    router.push(`/clientes/form?id=${clientId}`);
+  const handleEdit = (productId: number) => {
+    router.push(`/produtos/form?id=${productId}`);
   };
 
   if (loading) {

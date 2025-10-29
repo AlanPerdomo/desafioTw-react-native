@@ -3,9 +3,10 @@ import * as Yup from "yup";
 export const produtoSchema = Yup.object().shape({
     id: Yup.number(),
     name: Yup.string().required("O nome é obrigatório"),
-    sobrenome: Yup.string().required("O sobrenome é obrigatório"),
-    email: Yup.string().email("O email é inválido").required("O email é obrigatório"),
+    price: Yup.string().required("O preco é obrigatório"),
+    description: Yup.string().required("A descricao é obrigatória"),
+    clienteId: Yup.number().required("O cliente é obrigatório"),
     ativo: Yup.boolean().default(false),
 });
 
-export type ClienteSchema = Yup.InferType<typeof produtoSchema>;
+export type ProdutoSchema = Yup.InferType<typeof produtoSchema>;
